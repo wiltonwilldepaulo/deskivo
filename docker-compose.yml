@@ -19,7 +19,7 @@ services:
     # Volumes persistentes e scripts de inicialização
     volumes:
       # Volume nomeado para persistir os dados do banco
-      - ./storage/pgdata:/var/lib/postgresql/18/docker
+      - ./storage/pgdata:/var/lib/postgresql
       # Script SQL executado automaticamente na primeira inicialização
       - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
     ports:
