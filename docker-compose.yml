@@ -20,6 +20,8 @@ services:
     volumes:
       # Volume nomeado para persistir os dados do banco
       - ./storage/pgdata:/var/lib/postgresql/18/docker
+      # Script SQL executado automaticamente na primeira inicialização
+      - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
     ports:
       - "5432:5432"
     # Conecta o container à rede interna do projeto
