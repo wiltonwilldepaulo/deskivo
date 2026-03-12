@@ -17,10 +17,23 @@ export default class MainWindowFactory {
                 nodeIntegration: false,
             },
         });
-        mainWindow.webContents.openDevTools();
         if (process.env.APP_ENV === 'development') {
+            // Abre automaticamente o DevTools (console do desenvolvedor) junto com a janela
+            mainWindow.webContents.openDevTools();
         }
-
+        // Registra um handler IPC que escuta o evento 'window:open-page' disparado pelo renderer via ipcRenderer.invoke
+        ipcMain.handle('window:open-page', async (_event, pageName) => {
+            // Carrega o arquivo HTML correspondente ao nome da página recebida, dentro do diretório PAGES_DIR
+            await mainWindow.loadFile(path.join(PAGES_DIR, pageName));
+        });
+        // Registra um handler IPC que escuta o evento 'window:save-product' 
+        // disparado pelo renderer para salvar dados de produto
+        ipcMain.handle('product:save', async (_event, productData) => {
+            return await ProductRepository.insert(productData);
+        });
+        // Carrega o arquivo index.html na janela assim que ela é criada, exibindo a tela inicial
+        mainWindow.loadFile(path.join(PAGES_DIR, 'index.html'));
+        // Retorna a instância da janela criada para que possa ser referenciada em outros lugares da aplicação
         return mainWindow;
     }
 }
