@@ -35,8 +35,10 @@ export default class MainWindowFactory {
                 nodeIntegration: false,
             },
         });
-        // Abre automaticamente o DevTools (console do desenvolvedor) junto com a janela
-        mainWindow.webContents.openDevTools();
+        if (process.env.APP_ENV === 'development') {
+            // Abre automaticamente o DevTools (console do desenvolvedor) junto com a janela
+            mainWindow.webContents.openDevTools();
+        }
         // Registra um handler IPC que escuta o evento 'window:open-page' disparado pelo renderer via ipcRenderer.invoke
         ipcMain.handle('window:open-page', async (_event, pageName) => {
             // Carrega o arquivo HTML correspondente ao nome da página recebida, dentro do diretório PAGES_DIR
