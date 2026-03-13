@@ -15,8 +15,9 @@ export default class MainWindowFactory {
                 preload: path.join(__dirname, '..', '..', '..', 'preload', 'preload.js'),
                 contextIsolation: true,
                 nodeIntegration: false,
-            },
+            }
         });
+        
         if (process.env.APP_ENV === 'development') {
             // Abre automaticamente o DevTools (console do desenvolvedor) junto com a janela
             mainWindow.webContents.openDevTools();
@@ -31,6 +32,7 @@ export default class MainWindowFactory {
         ipcMain.handle('product:save', async (_event, productData) => {
             return await ProductRepository.insert(productData);
         });
+
         // Carrega o arquivo index.html na janela assim que ela é criada, exibindo a tela inicial
         mainWindow.loadFile(path.join(PAGES_DIR, 'index.html'));
         // Retorna a instância da janela criada para que possa ser referenciada em outros lugares da aplicação
