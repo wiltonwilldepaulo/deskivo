@@ -1,19 +1,17 @@
 {
     "name": "deskivo",
     "version": "1.0.0",
-    "main": "app/renderer/main/index.js",
+    "main": "app/view/js/index.js",
     "type": "module",
     "private": true,
     "scripts": {
         "start": "electron ."
     },
     "devDependencies": {
-        "drizzle-kit": "^0.31.9",
         "electron": "^40.7.0"
     },
     "dependencies": {
         "dotenv": "^17.3.1",
-        "drizzle-orm": "^0.45.1",
         "pg": "^8.20.0"
     }
 }
