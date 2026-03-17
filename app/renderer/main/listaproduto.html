@@ -1,43 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.7/css/dataTables.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <link href="https://cdn.datatables.net/2.3.7/css/dataTables.bootstrap5.min.css" rel="stylesheet"
+        integrity="sha384-q6bAgUAsga3oT16XWJ1toXdKcHmBp45jM5roe3RCQ6dET9xGL89Qmpx4tJAI2pm2" crossorigin="anonymous">
+    <link href="https://cdn.datatables.net/responsive/3.0.8/css/responsive.bootstrap5.min.css" rel="stylesheet"
+        integrity="sha384-seyUnB//1QOFEqox9uI7YTLBgz9jBwFRqZvsEPFrTw6NAsFEo70nhBWsQfODqiYA" crossorigin="anonymous">
+
     <title>Lista de produto</title>
 </head>
 
 <body>
 
-    <button id="voltar-button" class="btn btn-warning">Voltar</button>
-    <button id="cadastro-button" class="btn btn-primary">Cadastro</button>
+    <div class="container">
+        <!-- Aqui teremos a navegação com componente Breadcrumb-->
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><span onclick="window.electronAPI.openPage('index.html')"
+                                style="cursor: pointer;">Home</span></li>
+                        <li class="breadcrumb-item active" aria-current="page">Lista de produtos</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <!--CARD com a tabela e o botão de adicionar novo produto-->
+        <div class="row">
+            <div class="col-12">
+                <div class="card" style="width: 100%;">
+                    <div class="card-header">
+                        <button class="btn btn-primary" onclick="window.electronAPI.openPage('produto.html')">Adicionar
+                            produto</button>
+                    </div>
+                    <div class="card-body">
+                        <table id="tabela" class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Nome</th>
+                                    <th>Valor venda</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Mause</td>
+                                    <td>1.295,59</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Monitor OLED 27 polegado HDR 4k</td>
+                                    <td>3.295,59</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Teclado mecanico</td>
+                                    <td>850,35</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <h2>Lista de Produtos</h2>
-
-    <br>
-
-    <table id="table-products" class="display" style="width:100%">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Valor</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Linhas populadas via JS -->
-        </tbody>
-    </table>
-
-    <!-- 1. jQuery (obrigatório para DataTables) -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
-    <!-- 2. DataTables CSS -->
-
-    <!-- 3. DataTables JS -->
-    <script src="https://cdn.datatables.net/2.3.7/js/dataTables.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha384-NXgwF8Kv9SSAr+jemKKcbvQsz+teULH/a5UNJvZc6kP47hZgl62M1vGnw6gHQhb1"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/2.3.7/js/dataTables.min.js"
+        integrity="sha384-Lo2E+ASlyar6zUXt6sPEy5uaDGtDGHXo300rohaW4/AV26JdoLBT9zhcOhV8BtL8"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/2.3.7/js/dataTables.bootstrap5.min.js"
+        integrity="sha384-3BApNGXgbm9rg2kjIbaEVprAGb2B0n9QyLjBrH090WdkzZ3IiUv8RZoTh5uP8oWH"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/responsive/3.0.8/js/dataTables.responsive.min.js"
+        integrity="sha384-jp1JS4vMvRmld4ZK9Co4AZftrm1tt3FbEZrCdFZIcoRiazQGkTqOS1QqI060oG2F"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/responsive/3.0.8/js/responsive.bootstrap5.js"
+        integrity="sha384-hyp/YDWGBMFqg7pJuS+y+2VWJkwnOyX+oMN9fWcxINo2flqjC/SdNaHj8LIV4zKJ"
+        crossorigin="anonymous"></script>
 
     <script type="module" src="listaproduto.js"></script>
 </body>
