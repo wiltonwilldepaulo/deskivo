@@ -1,7 +1,7 @@
 {
     "name": "deskivo",
     "version": "1.0.0",
-    "main": "app/renderer/main/index.js",
+    "main": "main.js",
     "type": "module",
     "private": true,
     "scripts": {
@@ -62,14 +62,11 @@
         "electronVersion": "40.7.0"
     },
     "devDependencies": {
-        "drizzle-kit": "^0.31.9",
         "electron": "^40.7.0",
         "electron-builder": "^25.1.8"
     },
     "dependencies": {
-        "datatables.net-dt": "^2.3.7",
         "dotenv": "^17.3.1",
-        "drizzle-orm": "^0.45.1",
         "knex": "^3.1.0",
         "pg": "^8.20.0",
         "postgres": "^3.4.8"

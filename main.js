@@ -1,0 +1,18 @@
+import 'dotenv/config';
+import { app } from 'electron';
+import Template from './app/mixin/Template.js';
+import './app/route/route.js';
+
+app.whenReady().then(() => {
+    const win = Template.create('main', {
+        width: 1280,
+        height: 800,
+        title: 'DESKIVO',
+    });
+
+    Template.loadView(win, 'main');
+});
+
+app.on('window-all-closed', () => {
+    if (process.platform !== 'darwin') app.quit();
+});
