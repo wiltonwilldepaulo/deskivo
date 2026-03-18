@@ -1,4 +1,5 @@
 import { drizzle } from 'drizzle-orm/node-postgres';
+import { ilike, or, sql, asc } from 'drizzle-orm';
 import Connection from '../Connection.js';
 import { products } from '../schema.js';
 
@@ -16,50 +17,37 @@ export default class ProductRepository {
             client.release();
         }
     }
-    static async search({ draw, start = 0, length = 10, search = '' }) {
+    static async search(data) {
+        //Captura o termo de pesquisa sem o %%
+        const rawSearch = String(data?.term ?? '').trim();
+        //Captura o termo da pesquisa já aplicando o %%
+        const terms = `%${data?.term}%`;
         try {
-            const term = `%${search}%`;
+            //Abre a conexão com banco de dados
+            const client = await Connection.connect();
+            const db = drizzle(client);
+            const whereClause =
+                rawSearch !== ''
+                    ? or(
+                        sql`${products.id}::text ILIKE ${terms}`,
+                        ilike(products.name, terms),
+                        sql`${products.price}::text ILIKE ${terms}`
+                    )
+                    : undefined;
 
-            // Total sem filtro
-            const totalResult = await db
-                .select({ total: sql`count(*)::int` })
-                .from(products);
-
-            const recordsTotal = totalResult[0]?.total ?? 0;
-
-            // Total filtrado
-            const filteredResult = await db
-                .select({ filtered: sql`count(*)::int` })
-                .from(products)
-                .where(sql`
-                    name     ILIKE ${term}
-                    OR category ILIKE ${term}
-                `);
-
-            const recordsFiltered = filteredResult[0]?.filtered ?? 0;
-
-            // Dados da página
-            const data = await db
+            const result = await db
                 .select()
                 .from(products)
-                .where(sql`
-                    name     ILIKE ${term}
-                    OR category ILIKE ${term}
-                `)
-                .limit(length)
-                .offset(start)
-                .orderBy(products.name);
+                .where(whereClause)
+                .orderBy(asc(products.name))
+                .offset(data?.offset)
+                .limit(data?.limit);
 
             return {
-                draw,
-                recordsTotal,
-                recordsFiltered,
-                data,
+                data: result
             };
-
         } catch (error) {
             console.error('[ProductRepository] Erro na busca:', error.message);
-
             return {
                 draw,
                 recordsTotal: 0,

@@ -70,6 +70,7 @@
         "datatables.net-dt": "^2.3.7",
         "dotenv": "^17.3.1",
         "drizzle-orm": "^0.45.1",
+        "knex": "^3.1.0",
         "pg": "^8.20.0",
         "postgres": "^3.4.8"
     }
