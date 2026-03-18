@@ -49,7 +49,6 @@ export default class ProductRepository {
         } catch (error) {
             console.error('[ProductRepository] Erro na busca:', error.message);
             return {
-                draw,
                 recordsTotal: 0,
                 recordsFiltered: 0,
                 data: [],
