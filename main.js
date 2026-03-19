@@ -1,4 +1,4 @@
-import 'dotenv/config';
+import './app/config/env.js';
 import { app } from 'electron';
 import Template from './app/mixin/Template.js';
 
@@ -11,7 +11,7 @@ app.whenReady().then(() => {
         height: 800,
         title: 'DESKIVO',
     });
-    // Agora aponta para pages/main que herda de layouts/main
+
     Template.loadView(win, 'pages/home');
     win.maximize();
 });
