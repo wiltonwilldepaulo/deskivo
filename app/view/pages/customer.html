@@ -3,55 +3,48 @@
 {% block title %}Novo Cliente{% endblock %}
 
 {% block content %}
-<h2>Cadastro de Cliente</h2>
-
+<div class="row">
+    <div class="col-12">
+        <h2>Cadastro de Cliente</h2>
+    </div>
+</div>
 <form id="form">
-    <label>Nome:</label>
-    <input type="text" name="name" required>
-
-    <label>Email:</label>
-    <input type="email" name="email" required>
-
-    <label>Telefone:</label>
-    <input type="text" name="phone">
-
-    <label>Cidade:</label>
-    <select name="city">
-        <option value="">Selecione</option>
-        <option value="São Paulo">São Paulo</option>
-        <option value="Rio de Janeiro">Rio de Janeiro</option>
-        <option value="Curitiba">Curitiba</option>
-    </select>
-
-    <label>Observações:</label>
-    <textarea name="notes" rows="3"></textarea>
-
-    <label>
-        <input type="checkbox" name="active" value="true" checked style="width:auto; margin-right:6px">
-        Cliente ativo
-    </label>
-    <br><br>
-
-    <button type="submit">Salvar</button>
+    <div class="row">
+        <div class="col-6">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="nome" name="nome" placeholder="example" autofocus>
+                <label for="nome">Nome do Cliente</label>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="cpf" name="cpf" placeholder="example" autofocus>
+                <label for="nome">CPF do Cliente</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="ativo" id="ativo" value="true">
+                <label class="form-check-label" for="ativo">
+                    Ativo?
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <button type="button" class="btn btn-outline-success">
+                <i class="fa-solid fa-floppy-disk"></i>
+                Salvar
+            </button>
+        </div>
+    </div>
 </form>
 
-<p id="msg"></p>
 {% endblock %}
 
 {% block scripts %}
-<script>
-    document.getElementById('form').addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        const data = formToJson(e.target);
-
-        try {
-            await api.customer.insert(data);
-            showMsg('msg', 'Cliente salvo com sucesso!', 'success');
-            e.target.reset();
-        } catch (err) {
-            showMsg('msg', 'Erro: ' + err.message, 'error');
-        }
-    });
-</script>
+<script src="file:///{{ assets }}/pages/customer.js"></script>
 {% endblock %}

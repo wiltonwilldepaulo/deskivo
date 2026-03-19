@@ -1,31 +1,28 @@
-<script>
+<!-- jQuery (DataTables depende dele) -->
+<script src="file:///{{ modules }}/jquery/dist/jquery.min.js"></script>
 
-    /**
-     * Coleta todos os campos de um formulário como objeto.
-     * Uso: const data = formToJson(document.getElementById('form'));
-     */
-    function formToJson(form) {
-        const data = Object.fromEntries(new FormData(form));
+<!-- Inputmask -->
+<script src="file:///{{ modules }}/inputmask/dist/inputmask.min.js"></script>
+<script src="file:///{{ modules }}/inputmask/dist/bindings/inputmask.binding.js"></script>
 
-        // Checkboxes: garante true/false
-        form.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-            data[cb.name] = cb.checked;
-        });
 
-        return data;
-    }
+<!-- Bootstrap 5.3.8 (bundle inclui Popper.js) -->
+<script src="file:///{{ modules }}/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
-    /**
-     * Exibe mensagem de sucesso ou erro ao lado de um formulário.
-     * Uso: showMsg('msg', 'Salvo com sucesso!', 'success');
-     */
-    function showMsg(elementId, text, type = 'success') {
-        const el = document.getElementById(elementId);
-        if (!el) return;
-        el.textContent = text;
-        el.className = type === 'success' ? 'msg-success' : 'msg-error';
-    }
+<!-- DataTables core -->
+<script src="file:///{{ modules }}/datatables.net/js/dataTables.min.js"></script>
 
-    console.log('[DESKIVO] App carregado');
+<!-- DataTables + Bootstrap 5 theme -->
+<script src="file:///{{ modules }}/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
 
-</script>
+<!-- DataTables Responsive -->
+<script src="file:///{{ modules }}/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+
+<!-- DataTables Responsive + Bootstrap 5 theme -->
+<script src="file:///{{ modules }}/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+
+<!-- Font Awesome 7.2 -->
+<script src="file:///{{ modules }}/@fortawesome/fontawesome-free/js/all.min.js"></script>
+
+<!-- Utilitários globais -->
+<script src="file:///{{ assets }}/components/utils.js"></script>
