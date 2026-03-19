@@ -1,14 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "layouts/main.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de clientes</title>
-</head>
+{% block title %}Clientes{% endblock %}
 
-<body>
-    <button onclick="api.window.openModal('customer')">Cadastrar</button>
-</body>
+{% block content %}
+<h2>Lista de Clientes</h2>
 
-</html>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+{% endblock %}
+
+{% block scripts %}
+<script></script>
+{% endblock %}

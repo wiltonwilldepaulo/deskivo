@@ -57,18 +57,7 @@ const connection = knex({
     // Debug de queries apenas em development
     debug: !IS_PROD,
 });
-//  Health check — valida a conexão ao iniciar
-connection.raw('SELECT 1+1 AS result')
-    .then(() => {
-        console.log(
-            `[DB] PostgreSQL conectado ` +
-            `(${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME})`
-        );
-    })
-    .catch((err) => {
-        console.error('[DB] Falha na conexão:', err.message);
-        process.exit(1);
-    });
+
 //  Shutdown graceful — libera pool ao encerrar
 const gracefulShutdown = () => {
     console.log('[DB] Encerrando pool de conexões...');

@@ -13,7 +13,7 @@
     "build": {
         "appId": "com.deskivo.app",
         "productName": "Deskivo",
-        "copyright": "Copyright © 2025 Deskivo",
+        "copyright": "Copyright © 2026 Deskivo",
         "directories": {
             "output": "C:/deskivo"
         },
@@ -68,7 +68,7 @@
     "dependencies": {
         "dotenv": "^17.3.1",
         "knex": "^3.1.0",
-        "pg": "^8.20.0",
-        "postgres": "^3.4.8"
+        "nunjucks": "^3.2.4",
+        "pg": "^8.20.0"
     }
 }

@@ -1,0 +1,31 @@
+<script>
+
+    /**
+     * Coleta todos os campos de um formulário como objeto.
+     * Uso: const data = formToJson(document.getElementById('form'));
+     */
+    function formToJson(form) {
+        const data = Object.fromEntries(new FormData(form));
+
+        // Checkboxes: garante true/false
+        form.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+            data[cb.name] = cb.checked;
+        });
+
+        return data;
+    }
+
+    /**
+     * Exibe mensagem de sucesso ou erro ao lado de um formulário.
+     * Uso: showMsg('msg', 'Salvo com sucesso!', 'success');
+     */
+    function showMsg(elementId, text, type = 'success') {
+        const el = document.getElementById(elementId);
+        if (!el) return;
+        el.textContent = text;
+        el.className = type === 'success' ? 'msg-success' : 'msg-error';
+    }
+
+    console.log('[DESKIVO] App carregado');
+
+</script>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}DESKIVO{% endblock %}</title>
+
+    {% include "partial/css.html" %}
+    {% block styles %}{% endblock %}
+</head>
+
+<body>
+
+    {% block menu %}{% endblock %}
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    {% include "partial/script.html" %}
+    {% block scripts %}{% endblock %}
+
+</body>
+
+</html>
