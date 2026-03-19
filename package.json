@@ -15,13 +15,25 @@
         "productName": "Deskivo",
         "copyright": "Copyright © 2026 Deskivo",
         "directories": {
-            "output": "C:/deskivo"
+            "output": "dist"
         },
+        "asar": true,
+        "asarUnpack": [
+            "app/view/**/*",
+            "node_modules/nunjucks/**/*"
+        ],
         "files": [
             "app/**/*",
-            "node_modules/**/*",
+            "main.js",
             "package.json",
-            ".env"
+            "!app/**/*.map",
+            "!app/**/test/**"
+        ],
+        "extraFiles": [
+            {
+                "from": ".env.production",
+                "to": ".env"
+            }
         ],
         "win": {
             "target": [
@@ -39,7 +51,10 @@
             "allowToChangeInstallationDirectory": true,
             "createDesktopShortcut": true,
             "createStartMenuShortcut": true,
-            "shortcutName": "Deskivo"
+            "shortcutName": "Deskivo",
+            "installerIcon": "app/assets/icon.ico",
+            "uninstallerIcon": "app/assets/icon.ico",
+            "installerHeaderIcon": "app/assets/icon.ico"
         },
         "linux": {
             "target": [
@@ -58,8 +73,7 @@
             ],
             "icon": "app/assets/icon.png",
             "category": "Office"
-        },
-        "electronVersion": "40.7.0"
+        }
     },
     "devDependencies": {
         "electron": "^40.7.0",
