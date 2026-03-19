@@ -11,3 +11,14 @@ function showMsg(elementId, text, type = 'success') {
     el.textContent = text;
     el.className = type === 'success' ? 'msg-success' : 'msg-error';
 }
+
+function toast(icon, title, text, timer = 3000) {
+    return Swal.fire({
+        icon,
+        title,
+        text,
+        timer,
+        timerProgressBar: true,
+        showConfirmButton: false,
+    });
+}

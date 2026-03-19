@@ -1,13 +1,27 @@
 import { ipcMain, BrowserWindow } from 'electron';
 import Template from '../mixin/Template.js';
+import Customer from '../controller/Customer.js';
 
 function getWin(event) {
     return BrowserWindow.fromWebContents(event.sender);
 }
+
+// Avisa todas as janelas para recarregar
+function broadcastReload(channel) {
+    for (const win of BrowserWindow.getAllWindows()) {
+        win.webContents.send(channel);
+    }
+}
+
+// ══════════════════════════════════════════════
+//  WINDOW
+// ══════════════════════════════════════════════
+
 ipcMain.handle('window:open', (_e, name, opts = {}) => {
     const win = Template.create(name, opts);
     Template.loadView(win, name);
 });
+
 ipcMain.handle('window:openModal', (e, name, opts = {}) => {
     const parent = getWin(e);
     if (!parent) return;
@@ -23,17 +37,53 @@ ipcMain.handle('window:openModal', (e, name, opts = {}) => {
     });
     Template.loadView(win, name);
 });
-// ── Customer ────────────────────────
+
+ipcMain.handle('window:close', (e) => {
+    getWin(e)?.close();
+});
+
+// ══════════════════════════════════════════════
+//  TEMP STORE — dados temporários entre janelas
+// ══════════════════════════════════════════════
+
+let tempData = {};
+
+ipcMain.handle('temp:set', (_e, key, data) => {
+    tempData[key] = data;
+});
+
+ipcMain.handle('temp:get', (_e, key) => {
+    const data = tempData[key] || null;
+    delete tempData[key];
+    return data;
+});
+
+// ══════════════════════════════════════════════
+//  CUSTOMER
+// ══════════════════════════════════════════════
+
 ipcMain.handle('customer:insert', async (_e, data) => {
-    const [result] = await connection('customers').insert(data).returning('*');
+    const result = await Customer.insert(data);
+    if (result.status) broadcastReload('customer:reload');
     return result;
 });
+
 ipcMain.handle('customer:find', async (_e, where = {}) => {
-    return connection('customers').where(where).select('*');
+    return await Customer.find(where);
 });
+
+ipcMain.handle('customer:findById', async (_e, id) => {
+    return await Customer.findById(id);
+});
+
 ipcMain.handle('customer:update', async (_e, id, data) => {
-    return connection('customers').where({ id }).update(data);
+    const result = await Customer.update(id, data);
+    if (result.status) broadcastReload('customer:reload');
+    return result;
 });
+
 ipcMain.handle('customer:delete', async (_e, id) => {
-    return connection('customers').where({ id }).del();
+    const result = await Customer.delete(id);
+    if (result.status) broadcastReload('customer:reload');
+    return result;
 });
