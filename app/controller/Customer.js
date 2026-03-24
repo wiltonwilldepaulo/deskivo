@@ -15,6 +15,7 @@ export default class Customer {
         if (!data.nome || data.nome.trim() === '') {
             return { status: false, msg: 'O campo nome é obrigatório', id: null, data: [] };
         }
+
         try {
 
             const clean = Customer.#sanitize(data);
