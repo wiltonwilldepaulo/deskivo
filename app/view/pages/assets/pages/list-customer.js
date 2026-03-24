@@ -46,10 +46,10 @@ $('#table-customers').DataTable({
             searchable: false,
             render: function (data, type, row) {
                 return `
-                <button onclick="editCustomer(${row.id})" class="btn btn-warning btn-sm">
+                <button onclick="editCustomer(${row.id})" class="btn btn-xs btn-warning btn-sm">
                     <i class="fa-solid fa-pen-to-square"></i> Editar
                 </button>
-                <button onclick="deleteCustomer(${row.id})" class="btn btn-danger btn-sm">
+                <button onclick="deleteCustomer(${row.id})" class="btn btn-xs btn-danger btn-sm">
                     <i class="fa-solid fa-trash"></i> Excluir
                 </button>
             `;

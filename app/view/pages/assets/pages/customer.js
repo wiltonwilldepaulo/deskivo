@@ -5,10 +5,7 @@ const Id = document.getElementById('id')
 const form = document.getElementById('form');
 Inputmask('999.999.999-99').mask('#cpf');
 
-// ══════════════════════════════════════════════
 //  CARREGA DADOS DE EDIÇÃO (se existirem)
-// ══════════════════════════════════════════════
-
 (async () => {
     const editData = await api.temp.get('customer:edit');
 
