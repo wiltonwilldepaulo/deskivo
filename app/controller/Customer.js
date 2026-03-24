@@ -42,11 +42,11 @@ export default class Customer {
             draw = 1,
         } = data;
 
-        // ── Total sem filtro ────────────────
+        //Total sem filtro
         const [{ count: total }] = await connection(Customer.table)
             .count('id as count');
 
-        // ── Monta WHERE da busca ────────────
+        //Monta WHERE da busca
         const search = term?.trim();
 
         function applySearch(query) {
@@ -60,12 +60,12 @@ export default class Customer {
             return query;
         }
 
-        // ── Total filtrado ──────────────────
+        // Total filtrado
         const filteredQ = connection(Customer.table).count('id as count');
         applySearch(filteredQ);
         const [{ count: filtered }] = await filteredQ;
 
-        // ── Dados paginados ─────────────────
+        // Dados paginados
         const orderColumn = Customer.#columns[column] || 'id';
         const orderDir = orderType === 'desc' ? 'desc' : 'asc';
 
@@ -151,7 +151,7 @@ export default class Customer {
             if (value === 'false') { clean[key] = false; continue; }
             clean[key] = value;
         }
-
+        
         return clean;
     }
 }

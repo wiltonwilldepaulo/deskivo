@@ -7,6 +7,7 @@ export async function seed(knex) {
   const total = 100000;
 
   for (let i = 0; i < total; i += batchSize) {
+    
     const batch = Array.from({ length: batchSize }, () => ({
       nome: faker.person.fullName(),
       cpf: faker.string.numeric(11),
