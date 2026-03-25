@@ -8,7 +8,8 @@
         "start": "chcp 65001 >nul && electron .",
         "build:win": "electron-builder --win",
         "build:linux": "electron-builder --linux",
-        "build:all": "electron-builder --win --linux"
+        "build:mac": "electron-builder --mac",
+        "build:all": "electron-builder --win --linux --mac"
     },
     "build": {
         "appId": "com.deskivo.app",
@@ -44,7 +45,7 @@
                     ]
                 }
             ],
-            "icon": "app/assets/icon.ico"
+            "icon": "app/view/pages/assets/img/icon.png"
         },
         "nsis": {
             "oneClick": false,
@@ -52,9 +53,9 @@
             "createDesktopShortcut": true,
             "createStartMenuShortcut": true,
             "shortcutName": "Deskivo",
-            "installerIcon": "app/assets/icon.ico",
-            "uninstallerIcon": "app/assets/icon.ico",
-            "installerHeaderIcon": "app/assets/icon.ico"
+            "installerIcon": "app/view/pages/assets/img/icon.png",
+            "uninstallerIcon": "app/view/pages/assets/img/icon.png",
+            "installerHeaderIcon": "app/view/pages/assets/img/icon.png"
         },
         "linux": {
             "target": [
@@ -71,7 +72,7 @@
                     ]
                 }
             ],
-            "icon": "app/assets/icon.png",
+            "icon": "app/view/pages/assets/img/icon.png",
             "category": "Office"
         }
     },

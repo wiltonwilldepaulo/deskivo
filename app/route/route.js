@@ -13,10 +13,7 @@ function broadcastReload(channel) {
     }
 }
 
-// ══════════════════════════════════════════════
 //  WINDOW
-// ══════════════════════════════════════════════
-
 ipcMain.handle('window:open', (_e, name, opts = {}) => {
     const win = Template.create(name, opts);
     Template.loadView(win, name);
@@ -42,10 +39,7 @@ ipcMain.handle('window:close', (e) => {
     getWin(e)?.close();
 });
 
-// ══════════════════════════════════════════════
 //  TEMP STORE — dados temporários entre janelas
-// ══════════════════════════════════════════════
-
 let tempData = {};
 
 ipcMain.handle('temp:set', (_e, key, data) => {
@@ -58,10 +52,7 @@ ipcMain.handle('temp:get', (_e, key) => {
     return data;
 });
 
-// ══════════════════════════════════════════════
 //  CUSTOMER
-// ══════════════════════════════════════════════
-
 ipcMain.handle('customer:insert', async (_e, data) => {
     const result = await Customer.insert(data);
     if (result.status) broadcastReload('customer:reload');

@@ -14,7 +14,7 @@ const connection = knex({
         // SSL forçado em produção — rejeita conexões não criptografadas
         ssl: IS_PROD ? { rejectUnauthorized: true } : false,
     },
-    // ── Pool de conexões ─────────────────────
+    //Pool de conexões
     pool: {
         // Conexões pré-aquecidas prontas para uso imediato
         min: Number(process.env.DB_POOL_MIN) || 2,
@@ -43,10 +43,10 @@ const connection = knex({
             });
         },
     },
-    // ── Performance ─────────────────────────
+    //Performance
     searchPath: [DB_SCHEMA],
     wrapIdentifier: (value, origImpl) => origImpl(value),
-    // ── Logging ─────────────────────────────
+    //Logging
     log: {
         warn(msg) { console.warn('[DB WARN]', msg); },
         error(msg) { console.error('[DB ERROR]', msg); },

@@ -5,21 +5,17 @@ const Id = document.getElementById('id')
 const form = document.getElementById('form');
 Inputmask('999.999.999-99').mask('#cpf');
 
-// ══════════════════════════════════════════════
 //  CARREGA DADOS DE EDIÇÃO (se existirem)
-// ══════════════════════════════════════════════
-
 (async () => {
     const editData = await api.temp.get('customer:edit');
-
     if (editData) {
         // Modo edição
         Action.value = editData.action || 'e';
         Id.value = editData.id || '';
-
         // Preenche todos os campos pelo atributo name
         for (const [key, value] of Object.entries(editData)) {
             const field = form.querySelector(`[name="${key}"]`);
+
             if (!field) continue;
 
             if (field.type === 'checkbox') {
