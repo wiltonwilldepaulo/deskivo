@@ -2,7 +2,7 @@
     "name": "deskivo",
     "version": "1.0.0",
     "main": "main.js",
-    "type": "module",
+ 
     "private": true,
     "scripts": {
         "start": "chcp 65001 >nul && electron .",
@@ -77,7 +77,7 @@
         }
     },
     "devDependencies": {
-        "electron": "^40.7.0",
+        "electron": "^41.0.4",
         "electron-builder": "^25.1.8",
         "jest": "^30.3.0"
     },
