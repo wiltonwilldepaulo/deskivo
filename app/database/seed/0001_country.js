@@ -17,9 +17,7 @@ exports.seed = async function (knex) {
   const dados = paises.map((pais) => {
 
     const codigo = pais?.id?.['ISO-3166-1-ALPHA-2'] ?? null;
-
     const nome = pais?.nome?.abreviado ?? null;
-
     const regiao = pais?.localizacao?.regiao?.nome ?? null;
     const subRegiao = pais?.localizacao?.['sub-regiao']?.nome ?? null;
     const localizacao = [regiao, subRegiao].filter(Boolean).join(' - ') || null;
@@ -33,6 +31,7 @@ exports.seed = async function (knex) {
       : null;
 
     return { codigo, nome, localizacao, lingua, moeda };
+
   });
 
   // 4. INSERE EM LOTES DE 100 PARA MELHOR PERFORMANCE

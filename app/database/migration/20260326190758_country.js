@@ -1,6 +1,6 @@
 exports.up = function (knex) {
     return knex.schema.createTable('country', (table) => {
-        table.comment('Tabela de países disponíveis no sistema, contendo informações geográficas, linguísticas e monetárias de cada país.');
+        table.comment('Tabela de países disponíveis no sistema, linguísticas e monetárias de cada país.');
         // Chave primária auto-incremental (equivalente ao biginteger com identity)
         table.bigIncrements('id').primary();
         // Código do país (ex: BR, US, PT)
