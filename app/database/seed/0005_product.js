@@ -5,7 +5,7 @@ exports.seed = async function (knex) {
 
     const batchSize = 1000;
 
-    const total = 100000;
+    const total = 1000000;
 
     const unidades = ['UN', 'KG', 'G', 'LT', 'ML', 'CX', 'PC', 'FD'];
     for (let i = 0; i < total; i += batchSize) {
