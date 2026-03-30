@@ -33,22 +33,11 @@ export default class Customer {
 
     //Implementamos a pesquisa completa para o cliente
     static async find(data = {}) {
-        const {
-            term = '',
-            limit = 10,
-            offset = 0,
-            orderType = 'asc',
-            column = 0,
-            draw = 1,
-        } = data;
-
+        const { term = '', limit = 10, offset = 0, orderType = 'asc', column = 0, draw = 1 } = data;
         //Total sem filtro
-        const [{ count: total }] = await connection(Customer.table)
-            .count('id as count');
-
+        const [{ count: total }] = await connection(Customer.table).count('id as count');
         //Monta WHERE da busca
         const search = term?.trim();
-
         function applySearch(query) {
             if (search) {
                 query.where(function () {
@@ -59,24 +48,19 @@ export default class Customer {
             }
             return query;
         }
-
         // Total filtrado
         const filteredQ = connection(Customer.table).count('id as count');
         applySearch(filteredQ);
         const [{ count: filtered }] = await filteredQ;
-
         // Dados paginados
         const orderColumn = Customer.#columns[column] || 'id';
         const orderDir = orderType === 'desc' ? 'desc' : 'asc';
-
         const dataQ = connection(Customer.table).select('*');
         applySearch(dataQ);
         dataQ.orderBy(orderColumn, orderDir);
         dataQ.limit(parseInt(limit));
         dataQ.offset(parseInt(offset));
-
         const rows = await dataQ;
-
         return {
             draw: parseInt(draw),
             recordsTotal: parseInt(total),
@@ -151,7 +135,7 @@ export default class Customer {
             if (value === 'false') { clean[key] = false; continue; }
             clean[key] = value;
         }
-        
+
         return clean;
     }
 }
