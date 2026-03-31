@@ -1,9 +1,7 @@
 import { Datatables } from "../components/Datatables.js";
-
 api.customer.onReload(() => {
     $('#table-customers').DataTable().ajax.reload(null, false);
 });
-
 // Inicializa a tabela
 Datatables.SetTable('#table-customers', [
     { data: 'id' },
@@ -25,7 +23,6 @@ Datatables.SetTable('#table-customers', [
         }
     }
 ]).getData(filter => api.customer.find(filter));
-
 async function deleteCustomer(id) {
     const result = await Swal.fire({
         title: 'Tem certeza?',
@@ -47,7 +44,6 @@ async function deleteCustomer(id) {
         }
     }
 }
-
 async function editCustomer(id) {
     try {
         // 1. Busca os dados completos do cliente
@@ -71,6 +67,5 @@ async function editCustomer(id) {
         toast('error', 'Falha', 'Erro: ' + err.message);
     }
 }
-
 window.deleteCustomer = deleteCustomer;
 window.editCustomer = editCustomer;

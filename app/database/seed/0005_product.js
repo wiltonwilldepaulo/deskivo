@@ -3,9 +3,9 @@ const { faker } = require("@faker-js/faker");
 exports.seed = async function (knex) {
     await knex('product').del();
 
-    const batchSize = 1000;
+    const batchSize = 500;
 
-    const total = 1000000;
+    const total = 1000;
 
     const unidades = ['UN', 'KG', 'G', 'LT', 'ML', 'CX', 'PC', 'FD'];
     for (let i = 0; i < total; i += batchSize) {

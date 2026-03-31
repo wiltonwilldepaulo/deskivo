@@ -22,6 +22,13 @@ contextBridge.exposeInMainWorld('api', {
         onReload(callback) {
             ipcRenderer.on('customer:reload', () => callback());
         },
+    },
+    product: {
+        find(where) { return ipcRenderer.invoke('product:find', where); },
+        findById(id) { return ipcRenderer.invoke('product:findById', id); },
+        onReload(callback) {
+            ipcRenderer.on('product:reload', () => callback());
+        },
     }
 });
 
