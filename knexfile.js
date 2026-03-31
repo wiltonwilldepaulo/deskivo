@@ -24,6 +24,7 @@ const shared = {
         tableName: 'knex_migrations',
         // Diretório onde os arquivos de migration estão localizados
         directory: './app/database/migration',
+        disableTransactions: true
     },
     // Configurações dos seeds (dados iniciais/de teste para o banco)
     seeds: {
