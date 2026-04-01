@@ -79,7 +79,7 @@ async function deleteProduct(id) {
 }
 async function editProduct(id) {
     try {
-        // 1. Busca os dados completos do cliente
+        // 1. Busca os dados completos do produto
         const product = await api.product.findById(id);
         if (!product) {
             toast('error', 'Erro', 'Produto não encontrado.');
@@ -92,7 +92,7 @@ async function editProduct(id) {
         });
         // 3. Abre a modal
         api.window.openModal('pages/product', {
-            width: 1200,
+            width: 800,
             height: 420,
             title: 'Editar Produto',
         });
