@@ -8,7 +8,15 @@
         "build:win": "electron-builder --win",
         "build:linux": "electron-builder --linux",
         "build:mac": "electron-builder --mac",
-        "build:all": "electron-builder --win --linux --mac"
+        "build:all": "electron-builder --win --linux --mac",
+        
+        "test": "vitest",
+        "test:unit": "vitest --project unit",
+        "test:integration": "vitest --project integration",
+        "test:feature": "vitest --project feature",
+        "test:arch": "vitest --project architecture",
+        "test:run": "vitest run",
+        "test:coverage": "vitest run --coverage"
     },
     "build": {
         "appId": "com.deskivo.app",
