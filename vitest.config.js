@@ -1,4 +1,3 @@
-// vitest.config.js
 import { defineConfig } from 'vitest/config';
 import path from 'node:path';
 
@@ -31,6 +30,14 @@ export default defineConfig({
             },
             {
                 test: {
+                    name: 'factories',
+                    include: ['tests/factories/**/*.test.js'],
+                    environment: 'node',
+                    testTimeout: 30000,
+                },
+            },
+            {
+                test: {
                     name: 'feature',
                     include: ['tests/feature/**/*.test.js'],
                     environment: 'node',
@@ -39,7 +46,7 @@ export default defineConfig({
             },
             {
                 test: {
-                    name: 'architecture',
+                    name: 'arch',
                     include: ['tests/architecture/**/*.test.js'],
                     environment: 'node',
                     testTimeout: 10000,
@@ -62,3 +69,4 @@ export default defineConfig({
         },
     },
 });
+
