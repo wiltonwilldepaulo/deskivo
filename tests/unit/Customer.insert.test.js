@@ -1,4 +1,3 @@
-// tests/unit/Customer.insert.test.js
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import Customer from '../../app/controller/Customer.js';
 import connection from '../../app/database/Connection.js';
