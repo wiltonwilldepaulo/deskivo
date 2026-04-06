@@ -6,15 +6,15 @@ export default class SellingPriceCalculator {
         return this;
     }
 
-    addTotalTax(totalTax = 0) {
+    addTotalTax(totalTax) {
         return this;
     }
 
-    addProfitMargin(profitMargin = 0) {
+    addProfitMargin(profitMargin) {
         return this;
     }
 
-    operatingCost(operatingCost = 0) {
+    operatingCost(operatingCost) {
         return this;
     }
 

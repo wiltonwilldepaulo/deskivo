@@ -1,4 +1,5 @@
-import { SellingPriceCalculator } from '@app/view/pages/assets/components/SellingPriceCalculator.js';
+import { describe, it, expect } from 'vitest';
+import SellingPriceCalculator from '../../app/view/pages/assets/components/SellingPriceCalculator';
 
 describe('SellingPriceCalculator', () => {
 
