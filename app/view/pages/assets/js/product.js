@@ -1,5 +1,9 @@
+import { SellingPriceCalculator } from "../components/SellingPriceCalculator";
+
+//import { SellingPriceCalculator } from "../components/SellingPriceCalculator.js";
 const Action = document.getElementById('action');
 const Id = document.getElementById('id');
+const totalTax = document.getElementById('total_imposto');
 Inputmask("currency", {
     radixPoint: ',',
     inputtype: "text",
@@ -11,6 +15,25 @@ Inputmask("currency", {
         return String(value).replace('.', ',');
     }
 }).mask("#preco_venda, #preco_compra");
+Inputmask("currency", {
+    radixPoint: ',',
+    inputtype: "text",
+    prefix: '% ',
+    autoGroup: true,
+    groupSeparator: '.',
+    rightAlign: false,
+    onBeforeMask: function (value) {
+        return String(value).replace('.', ',');
+    }
+}).mask("#total_imposto, #margem_lucro, #custo_operacional");
+
+totalTax.addEventListener('keydown', () => {
+    const tax = String(totalTax.value).replace('%', '').replace(',', '.');
+    const result =SellingPriceCalculator.create()
+        .addTotalTax(tax)
+        .getData();
+    document.getElementById('total_importo_value').innerHTML = `${result.total_imposto}`;
+});
 
 //  CARREGA DADOS DE EDIÇÃO (se existirem)
 (async () => {
