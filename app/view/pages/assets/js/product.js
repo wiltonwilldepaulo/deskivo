@@ -1,9 +1,14 @@
-import { SellingPriceCalculator } from "../components/SellingPriceCalculator";
-
+import { SellingPriceCalculator } from "../components/SellingPriceCalculator.js"
 //import { SellingPriceCalculator } from "../components/SellingPriceCalculator.js";
 const Action = document.getElementById('action');
 const Id = document.getElementById('id');
+//Total de imposto
 const totalTax = document.getElementById('total_imposto');
+//Margem de lucro
+const profitMargin = document.getElementById('margem_lucro');
+//Custo operacional
+const operatingCost = document.getElementById('custo_operacional');
+
 Inputmask("currency", {
     radixPoint: ',',
     inputtype: "text",
@@ -27,11 +32,18 @@ Inputmask("currency", {
     }
 }).mask("#total_imposto, #margem_lucro, #custo_operacional");
 
-totalTax.addEventListener('keydown', () => {
-    const tax = String(totalTax.value).replace('%', '').replace(',', '.');
-    const result =SellingPriceCalculator.create()
+totalTax.addEventListener('input', () => {
+    const tax = parseFloat(String(totalTax.value).replace('%', '').replace(',', '.'));
+    const purchasePrice = parseFloat(String(document.getElementById('preco_compra').value).replace('R$ ', '').replace('.', '').replace(',', '.'));
+    const profitMarginValue = parseFloat(String(profitMargin.value).replace('%', '').replace(',', '.'));
+    const operatingCostValue = parseFloat(String(operatingCost.value).replace('%', '').replace(',', '.'));
+    const result = SellingPriceCalculator.create()
+        .addPurchasePrice(purchasePrice)
         .addTotalTax(tax)
+        .addProfitMargin(profitMarginValue)
+        .addOperatingCost(operatingCostValue)
         .getData();
+    console.log(result);
     document.getElementById('total_importo_value').innerHTML = `${result.total_imposto}`;
 });
 

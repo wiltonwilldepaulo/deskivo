@@ -59,6 +59,9 @@
             </div>
         </div>
         <div class="col-2">
+            <span id="total_importo_value"></span>
+        </div>
+        <div class="col-2">
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="unidade" name="unidade" placeholder="example" autofocus>
                 <label for="unidade">Unidade do produto</label>
@@ -93,5 +96,5 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="file:///{{ assets }}/js/product.js"></script>
+<script type="module" src="file:///{{ assets }}/js/product.js"></script>
 {% endblock %}
