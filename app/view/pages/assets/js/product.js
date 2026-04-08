@@ -1,9 +1,13 @@
-import { SellingPriceCalculator } from "../components/SellingPriceCalculator";
+import { SellingPriceCalculator } from "../components/SellingPriceCalculator.js";
 
 //import { SellingPriceCalculator } from "../components/SellingPriceCalculator.js";
 const Action = document.getElementById('action');
 const Id = document.getElementById('id');
-const totalTax = document.getElementById('total_imposto');
+const inputTotalTax = document.getElementById('total_imposto');
+const inputProfitMargin = document.getElementById('margem_lucro');
+const inputOperatingCost = document.getElementById('custo_operacional');
+const inputPurchasePrice = document.getElementById('preco_compra');
+
 Inputmask("currency", {
     radixPoint: ',',
     inputtype: "text",
@@ -27,12 +31,41 @@ Inputmask("currency", {
     }
 }).mask("#total_imposto, #margem_lucro, #custo_operacional");
 
-totalTax.addEventListener('keydown', () => {
-    const tax = String(totalTax.value).replace('%', '').replace(',', '.');
-    const result =SellingPriceCalculator.create()
+function determineSalePrice() {
+    const purchasePrice = parseFloat(String(inputPurchasePrice.value).replace('R$', '').replace('.', '').replace(',', '.')) || 0;
+    const tax = parseFloat(String(inputTotalTax.value).replace('%', '').replace(',', '.')) || 0;
+    const profitMargin = parseFloat(String(inputProfitMargin.value).replace('%', '').replace(',', '.')) || 0;
+    const operatingCost = parseFloat(String(inputOperatingCost.value).replace('%', '').replace(',', '.')) || 0;
+    if (profitMargin <= 0 && purchasePrice <= 0) {
+        document.getElementById('resultado-row').className = 'resultado-row mb-2 d-none';
+        return;
+    }
+    const result = SellingPriceCalculator.create()
         .addTotalTax(tax)
+        .addProfitMargin(profitMargin)
+        .addOperatingCost(operatingCost)
+        .addPurchasePrice(purchasePrice)
         .getData();
-    document.getElementById('total_importo_value').innerHTML = `${result.total_imposto}`;
+    document.getElementById('val-venda').innerHTML = `${result.valor_venda_sugerido.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+    document.getElementById('val-margem').innerHTML = `${result.valor_margem_lucro.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+    document.getElementById('val-custo').innerHTML = `${result.valor_custo_operacional.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+    document.getElementById('val-imposto').innerHTML = `${result.valor_total_imposto.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+    document.getElementById('resultado-row').className = 'resultado-row mb-2';
+}
+
+inputTotalTax.addEventListener('input', () => {
+    determineSalePrice();
+});
+
+inputProfitMargin.addEventListener('input', () => {
+    determineSalePrice();
+});
+
+inputOperatingCost.addEventListener('input', () => {
+    determineSalePrice();
+});
+inputPurchasePrice.addEventListener('input', () => {
+    determineSalePrice();
 });
 
 //  CARREGA DADOS DE EDIÇÃO (se existirem)

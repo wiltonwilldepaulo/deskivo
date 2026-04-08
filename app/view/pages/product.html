@@ -1,5 +1,7 @@
 {% extends "layouts/main.html" %}
-
+{% block styles %}
+<link rel="stylesheet" href="file:///{{ assets }}//css/product.css">
+{% endblock %}
 {% block title %}Novo Produto{% endblock %}
 
 {% block content %}
@@ -73,6 +75,28 @@
     </div>
     <div class="row">
         <div class="col-12">
+            <div class="resultado-row mb-2 d-none" id="resultado-row">
+                <div class="metrica-col">
+                    <span class="metrica-label">Total de imposto</span>
+                    <span class="metrica-valor" id="val-imposto">—</span>
+                </div>
+                <div class="metrica-col">
+                    <span class="metrica-label">Custo operacional</span>
+                    <span class="metrica-valor" id="val-custo">—</span>
+                </div>
+                <div class="metrica-col">
+                    <span class="metrica-label">Margem de lucro</span>
+                    <span class="metrica-valor" id="val-margem">—</span>
+                </div>
+                <div class="metrica-col destaque">
+                    <span class="metrica-label">Preço de venda sugerido</span>
+                    <span class="metrica-valor" id="val-venda">—</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
             <div class="form-floating">
                 <textarea class="form-control" placeholder="Leave a comment here" id="descricao" name="descricao"
                     style="height: 100px"></textarea>
@@ -93,5 +117,5 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="file:///{{ assets }}/js/product.js"></script>
+<script type="module" src="file:///{{ assets }}/js/product.js"></script>
 {% endblock %}

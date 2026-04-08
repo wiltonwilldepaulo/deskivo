@@ -58,7 +58,7 @@ async function editCustomer(id) {
             ...customer,
         });
         // 3. Abre a modal
-        api.window.openModal('pages/customer', {
+        api.window.open('pages/customer', {
             width: 600,
             height: 500,
             title: 'Editar Cliente',
