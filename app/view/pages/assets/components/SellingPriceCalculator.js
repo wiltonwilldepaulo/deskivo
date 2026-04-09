@@ -45,7 +45,7 @@ export class SellingPriceCalculator {
             }
         }
 
-        //2. Validação de domínio
+        //2. Validação do valor de compra e percentuais
         if (inputs.purchasePrice <= 0) {
             throw new RangeError(`Preço de compra deve ser maior que zero. Recebido: ${inputs.purchasePrice}`);
         }
@@ -94,7 +94,6 @@ export class SellingPriceCalculator {
         const valorImposto = sellingPrice * taxRate;
         const valorCustoOperacional = sellingPrice * operatingRate;
         const valorMargem = sellingPrice * marginRate;
-
         //7. Arredondamento monetário (2 casas) com correção de resíduo
         //   Garante que: arredondado(imposto) + arredondado(custo) + arredondado(margem)
         //              + precoCusto == arredondado(precoVenda)  (sem centavo perdido)
