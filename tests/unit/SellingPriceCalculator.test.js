@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { SellingPriceCalculator } from '../../app/view/pages/assets/components/SellingPriceCalculator';
+import { SellingPriceCalculator } from '../../app/view/pages/assets/components/SellingPriceCalculator.js';
 
 describe('SellingPriceCalculator', () => {
     // create()
@@ -17,7 +17,6 @@ describe('SellingPriceCalculator', () => {
     // Testa o erro de – divisão por zero getData()
     describe('getData() – divisão por zero', () => {
         it('deve lançar um erro quando o divisor for igual a zero', () => {
-            // taxRate=1.00 | marginRate=0 | opRate=0 → divisor = 1 - 1 = 0
             expect(() =>
                 SellingPriceCalculator
                     .create()
@@ -27,7 +26,25 @@ describe('SellingPriceCalculator', () => {
                     .addOperatingCost(0)
                     .getData()
 
-            ).toThrow('A soma de impostos, margem de lucro e custo operacional não pode ser 0');
+            ).toThrow('Preço de compra deve ser maior que zero. Recebido: 0');
+        });
+    });
+    // Testa com valores válidos getData()
+    describe('getData() – valores válidos', () => {
+        it('deve calcular o preço de venda corretamente com valores válidos', () => {
+            const result = SellingPriceCalculator
+                .create()
+                .addPurchasePrice(100)
+                .addTotalTax(10)
+                .addProfitMargin(20)
+                .addOperatingCost(5)
+                .getData();
+            expect(result).toEqual({
+                valor_venda_sugerido: 153.85,
+                valor_total_imposto: 15.38,
+                valor_margem_lucro: 30.78,
+                valor_custo_operacional: 7.69,
+            });
         });
     });
 });
