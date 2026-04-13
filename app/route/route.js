@@ -12,6 +12,10 @@ function broadcastReload(channel) {
         win.webContents.send(channel);
     }
 }
+ipcMain.handle('print:stringHTML', async (_e, html) => {
+    const print = new (require('../mixin/Print.js').default)();
+    return await print.stringHTML(html);
+});
 //  WINDOW
 ipcMain.handle('window:open', (_e, name, opts = {}) => {
     const win = Template.create(name, opts);
