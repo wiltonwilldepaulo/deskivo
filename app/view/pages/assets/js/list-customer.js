@@ -74,24 +74,18 @@ async function printCustomer(id) {
     try {
         // 1. Busca os dados completos do cliente
         const customer = await api.customer.findById(id);
+
         if (!customer) {
             toast('error', 'Erro', 'Cliente não encontrado.');
             return;
         }
-        api.print.stringHTML(`
-            <h1>Ficha do Cliente</h1>
-            <p><strong>ID:</strong> ${customer.id}</p>
-            <p><strong>Nome:</strong> ${customer.nome}</p>
-            <p><strong>CPF:</strong> ${customer.cpf}</p>
-        `).destino(`customer_${customer.id}.pdf`).print().then(result => {
-            if (result.sucesso) {
-                toast('success', 'Sucesso', 'PDF gerado em: ' + result.caminho);
-            } else {
-                toast('error', 'Erro', 'Falha ao gerar PDF.');
-            }
-        }).catch(err => {
-            toast('error', 'Erro', 'Erro: ' + err.message);
-        });
+        const html = `
+        <h1>Ficha do Cliente</h1>
+        <p><strong>ID:</strong> ${customer.id}</p>
+        <p><strong>Nome:</strong> ${customer.nome}</p>
+        <p><strong>CPF:</strong> ${customer.cpf}</p>
+        `;
+        api.report.print(html);
     } catch (err) {
         toast('error', 'Falha', 'Erro: ' + err.message);
     }

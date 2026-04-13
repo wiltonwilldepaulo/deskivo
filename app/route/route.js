@@ -2,6 +2,7 @@ import { ipcMain, BrowserWindow } from 'electron';
 import Template from '../mixin/Template.js';
 import Customer from '../controller/Customer.js';
 import Product from '../controller/Product.js';
+import { Print } from '../mixin/Print.js';
 
 function getWin(event) {
     return BrowserWindow.fromWebContents(event.sender);
@@ -12,9 +13,8 @@ function broadcastReload(channel) {
         win.webContents.send(channel);
     }
 }
-ipcMain.handle('print:stringHTML', async (_e, html) => {
-    const print = new (require('../mixin/Print.js').default)();
-    return await print.stringHTML(html);
+ipcMain.handle('print', (_e, stringHtml, args = {}) => {
+    Print.create().stringHTML(stringHtml);
 });
 //  WINDOW
 ipcMain.handle('window:open', (_e, name, opts = {}) => {
