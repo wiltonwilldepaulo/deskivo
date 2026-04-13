@@ -4,7 +4,6 @@ import fs from 'fs'
 import os from 'os'
 export class Print {
     #html = null
-    #destino = null
     #opcoes = {
         marginsType: 0,
         pageSize: 'A4',
@@ -13,7 +12,13 @@ export class Print {
     }
     //  Factory — ponto de entrada da interface fluente
     static create() {
-        return new Print()
+        return new Print();
     }
-
+    //  Define o conteúdo HTML a ser impresso
+    stringHTML(html) {
+        this.#html = html;
+        return this;
+    }
+    //Abre o PDF para exibição ou impressão
+    async print() { }
 }
