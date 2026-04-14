@@ -13,8 +13,9 @@ function broadcastReload(channel) {
         win.webContents.send(channel);
     }
 }
-ipcMain.handle('print', (_e, stringHtml, args = {}) => {
-    Print.create().stringHTML(stringHtml);
+//Imprimir PDF
+ipcMain.handle('print', async (_e, stringHtml, args = {}) => {
+    await Print.create().stringHTML(stringHtml).print();
 });
 //  WINDOW
 ipcMain.handle('window:open', (_e, name, opts = {}) => {
