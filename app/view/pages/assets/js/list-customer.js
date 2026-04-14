@@ -85,7 +85,7 @@ async function printCustomer(id) {
         <p><strong>Nome:</strong> ${customer.nome}</p>
         <p><strong>CPF:</strong> ${customer.cpf}</p>
         `;
-        api.report.print(html);
+        api.report.print(html, { landscape: false });
     } catch (err) {
         toast('error', 'Falha', 'Erro: ' + err.message);
     }

@@ -15,7 +15,11 @@ function broadcastReload(channel) {
 }
 //Imprimir PDF
 ipcMain.handle('print', async (_e, stringHtml, args = {}) => {
-    await Print.create().stringHTML(stringHtml).print();
+    await Print.create()
+        .stringCss(`<style>body { font-family: Arial; } h1 { color: #1a1a2e; }</style>`)
+        .stringHTML(stringHtml)
+        .setOptions(args)
+        .print();
 });
 //  WINDOW
 ipcMain.handle('window:open', (_e, name, opts = {}) => {
